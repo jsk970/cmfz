@@ -10,7 +10,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/easyui-lang-zh_CN.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/datagrid-scrollview.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/datagrid-detailview.js"></script>
 	<script type="text/javascript">
         $(function(){
 
@@ -57,7 +57,7 @@
                 console.log($(this));
                 var $text = $(this).text();
                 var $href = $(this).attr("data-link");
-                console.log($href);
+
                 var isExist = $("#center_tab").tabs("exists",$text);
                 /*
                 判断选项卡是否已经存在
@@ -69,7 +69,7 @@
                         title:$text,
                         href:$href,
                         closable:true,
-                        iconCls:"icon-ok",
+
                     });
                 }else{
                     $("#center_tab").tabs("select",$text);
@@ -137,7 +137,9 @@
 	</script>
 
 </head>
-<body class="easyui-layout">   
+
+<body class="easyui-layout">
+<div id="dialog"></div>
     <div data-options="region:'north',split:true" style="height:60px;background-color:  #5C160C">
     	<div style="font-size: 24px;color: #FAF7F7;font-family: 楷体;font-weight: 900;width: 500px;float:left;padding-left: 20px;padding-top: 10px" >持明法洲后台管理系统</div>
     	<div style="font-size: 16px;color: #FAF7F7;font-family: 楷体;width: 300px;float:right;padding-top:15px">欢迎您:xxxxx &nbsp;<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改密码</a>&nbsp;&nbsp;

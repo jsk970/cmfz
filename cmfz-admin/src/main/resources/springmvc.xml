@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.2.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd ">
+
+	
+	<!-- 注解扫描,只扫描Controller的注解 -->
+	<context:component-scan base-package="com.baizhi.cmfz">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+		
+	<!-- 注解驱动 并配置fastjson  -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	<!-- 加载外部静态资源（js  css） -->
+	<mvc:default-servlet-handler/>
+	
+	<!-- 视图解析器 -->
+	<bean id="view" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	<!-- 权限验证过滤器配置 -->
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			过滤所有的请求
+			<mvc:mapping path="/**"/>
+			<bean class="com.baizhi.cmfz.handlerinterceptor.CheckLogined"/>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	
+</beans>
+

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx"  
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.2.xsd
+                           http://www.springframework.org/schema/tx 
+                           http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+                            ">
+	<!-- 扫描除Controller之外的注解 -->
+	<context:component-scan base-package="com.baizhi.cmfz">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+
+	<context:property-placeholder location="classpath:/dbcp.properties"/>
+	<!-- 数据源对象 -->
+	<bean id="DataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="driverClassName" value="${driverClassName}"/>
+		<property name="url" value="${url}"/>
+		<property name="username" value="${name}"/>
+		<property name="password" value="${password}"/>
+	</bean>
+	<!-- SqlSessionFactory、工厂对象 -->
+	<bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="DataSource"/>
+		<property name="typeAliasesPackage" value="com.baizhi.cmfz.entity" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:com/baizhi/cmfz/mapper/*Mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Spring工厂创建数据访问层对象 -->
+	<bean id="MapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="SqlSessionFactory"/>
+		<property name="basePackage" value="com.baizhi.cmfz.dao"/>
+	</bean>
+	
+	<!-- 控制事务代码 SqlSession commit()|SqlSession roolback() -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- 提供数据源对象 -->
+		<property name="dataSource" ref="DataSource"/>
+	</bean>
+	
+	<!-- 注解事务驱动 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>
+

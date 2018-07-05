@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.cmfz.dao.MenuDAO">
+
+    <resultMap type="Menu" id="MenuResultMap">
+        <id column ="firstId" property="id"/>
+        <result column="firstName" property="menuName"/>
+        <result column="firstCode" property="menuCode"/>
+        <result column="firstMenuIcon" property="MenuIcon"/>
+        <result column="firstMenuLevel" property="menuLevel"/>
+        <collection property="Menulist" ofType="Menu">
+            <id column="child_id" property="id"/>
+            <result column="secondId" property="id"/>
+            <result column="secondName" property="menuName"/>
+            <result column="secondCode" property="menuCode"/>
+            <result column="secondMenuIcon" property="MenuIcon"/>
+            <result column="secondUrl" property="menuUrl"/>
+            <result column="secondMenuLevel" property="menuLevel"/>
+            <result column="parentId" property="menuParentId"/>
+
+        </collection>
+    </resultMap>
+
+
+    <select id="selectAllMenu" resultMap="MenuResultMap">
+        SELECT
+        t1.id firstId,
+        t1.menu_name firstName,
+        t1.menu_code firstCode,
+        t1.menu_icon firstMenuIcon,
+        t1.menu_level firstMenuLevel,
+        t2.id secondId,
+        t2.menu_name secondName,
+        t2.menu_code secondCode,
+        t2.menu_icon secondMenuIcon,
+        t2.menu_url secondUrl,
+        t2.menu_level secondMenuLevel,
+        t2.menu_parent_id parentId
+        FROM
+        t_menu t1
+        LEFT JOIN t_menu t2 ON t1.id = t2.menu_parent_id where t1.menu_level!="2"
+     </select>
+</mapper>

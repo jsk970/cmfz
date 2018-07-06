@@ -5,6 +5,9 @@ import com.baizhi.cmfz.entity.Pic;
 import com.baizhi.cmfz.service.PicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @program: cmfz
@@ -13,13 +16,22 @@ import org.springframework.stereotype.Service;
  * @create: 2018-07-05 20:07
  */
 @Service
+@Transactional
 public class PicServiceImpl implements PicService {
     @Autowired
     private PicDAO picDAO;
 
     @Override
+    @Transactional
     public int addPic(Pic pic) {
         int i = picDAO.insertPic(pic);
         return i;
+    }
+
+    @Override
+    @Transactional
+    public List<Pic> queryPicForPage(Integer start, Integer pageSize) {
+        List<Pic> pics = picDAO.selectPicForPage(start, pageSize);
+        return pics;
     }
 }

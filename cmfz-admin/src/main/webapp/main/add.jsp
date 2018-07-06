@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" isELIgnored="false" %>
 
 	<div id="panel" class="easyui-panel" style="width:100%;max-width:300px;padding:40px 40px;" >
-		<form id="ff_add" class="easyui-form" method="post" >
+		<form id="ff_add" class="easyui-form" method="post" enctype="multipart/form-data">
 			<div style="margin-bottom:15px;margin-left: 20px">
 				<input id="file" name="file">
 			</div>
@@ -45,7 +45,7 @@
 				iconCls:"icon-add",
 				onClick:function(){
 					$("#ff_add").form("submit",{
-						url:"",
+						url:"${pageContext.request.contextPath}/upload.do",
 						onSubmit:function(){
 							return $(this).form('validate');
 						},

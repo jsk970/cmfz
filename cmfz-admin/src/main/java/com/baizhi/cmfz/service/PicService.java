@@ -2,6 +2,8 @@ package com.baizhi.cmfz.service;
 
 import com.baizhi.cmfz.entity.Pic;
 
+import java.util.List;
+
 /**
  * @program: cmfz
  * @description: 添加轮播图图片
@@ -11,4 +13,6 @@ import com.baizhi.cmfz.entity.Pic;
 public interface PicService {
 
     public int addPic(Pic pic);
+
+    public List<Pic> queryPicForPage(Integer start,Integer pageSize);
 }

@@ -7,7 +7,7 @@ public class Pic implements Serializable {
     private Integer id;
     private String path;
     private String state;
-    private  String description;
+    private String description;
     private Date publishedDate;
 
     public Pic() {

@@ -12,25 +12,37 @@
                 singleSelect:true,
                 nowrap:false,
                 fitColumns:true,
-                url:'datagrid_data.json',
+                url:'${pageContext.request.contextPath}/showPicForPage.do',
 				toolbar:"#tools",
                 pagination:true,
+                pageList:[2,4,6,8,10],
+                pageSize:4,
 				fit:true,
                 columns:[[
-                    {field:'itemid',title:'Item ID',width:80},
-                    {field:'productid',title:'Product ID',width:100,sortable:true},
-                    {field:'listprice',title:'List Price',width:80,align:'right',sortable:true},
-                    {field:'unitcost',title:'Unit Cost',width:80,align:'right',sortable:true},
-                    {field:'attr1',title:'Attribute',width:150,sortable:true},
-                    {field:'status',title:'Status',width:60,align:'center'}
+                    {field:'id',title:'图片编号',width:80},
+                    {field:'description',title:'描述',width:100,sortable:true},
+                    {field:'publishedDate',title:'上传时间',width:80,align:'right',sortable:true,fitColumns:true,formatter:function(value,row,index){ // 格式化展示数据到对应的列
+                            var date = new Date(value);
+                            //console.log("value:"+date);
+                            // 年  月  日
+                            var year = date.getFullYear();
+                            var month = date.getMonth()+1;
+                            var day = date.getDay();
+                            var hh = date.getHours();
+                            var mm = date.getMinutes();
+                            var ss = date.getSeconds();
+                            return year+"年"+month+"月"+day+"日"+" "+hh+":"+mm+":"+ss;
+                        }},
+                    {field:'state',title:'状态',width:80,align:'right',sortable:true},
+
                 ]],
                 view: detailview,
                 detailFormatter: function(rowIndex, rowData){
                     return '<table><tr>' +
-                        '<td rowspan=2 style="border:0"><img src="images/' + rowData.itemid + '.png" style="height:50px;"></td>' +
+                        '<td rowspan=2 style="border:0"><img src="${pageContext.request.contextPath}/' + rowData.path +'" style="height:50px;"></td>' +
                         '<td style="border:0">' +
-                        '<p>Attribute: ' + rowData.attr1 + '</p>' +
-                        '<p>Status: ' + rowData.status + '</p>' +
+                        '<p>Attribute: ' + rowData.description + '</p>' +
+                        '<p>Status: ' + rowData.state + '</p>' +
                         '</td>' +
                         '</tr></table>';
                 }

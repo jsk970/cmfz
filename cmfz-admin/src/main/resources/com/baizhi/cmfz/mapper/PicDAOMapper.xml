@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
 <mapper namespace="com.baizhi.cmfz.dao.PicDAO">
-    <insert id="">
+    <insert id="insertPic">
         insert into t_pic values(#{id},#{path},#{state},#{description},#{publishedDate})
     </insert>
+    <resultMap type="Pic" id="PicResultMap">
+        <id column ="id" property="id"/>
+        <result column="path" property="path"/>
+        <result column="state" property="state"/>
+        <result column="description" property="description"/>
+        <result column="publish_date" property="publishedDate"/>
+    </resultMap>
+    <select id="selectPicForPage" resultMap="PicResultMap">
+        select * from t_pic LIMIT #{start},#{pageSize};
+    </select>
 </mapper>

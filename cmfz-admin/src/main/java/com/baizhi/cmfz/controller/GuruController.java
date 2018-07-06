@@ -26,4 +26,12 @@ public class GuruController {
         return map;
     }
 
+    @RequestMapping("/showByKeywords")
+    @ResponseBody
+    public Map<String,Object> showByKeywords(Integer page, Integer rows,String keywords){
+        System.out.println("123213123123123");
+        Map<String, Object> map = guruService.queryGuruBykeywords((page - 1) * rows, rows,keywords);
+        return map;
+    }
+
 }

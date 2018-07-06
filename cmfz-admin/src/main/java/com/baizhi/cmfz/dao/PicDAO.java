@@ -40,4 +40,6 @@ public interface PicDAO {
      * @return
      */
     public int updatePic(Pic pic);
+
+    public Pic selectPicById(Integer id);
 }

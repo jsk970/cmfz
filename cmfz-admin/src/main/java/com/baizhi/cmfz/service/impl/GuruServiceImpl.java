@@ -42,4 +42,20 @@ public class GuruServiceImpl implements GuruService {
         map.put("total", count);
         return map;
     }
+
+    @Override
+    @Transactional
+    public Map<String, Object> queryGuruBykeywords(Integer start, Integer pageSize, String keywords) {
+
+        HashMap<String, Object> map = new HashMap<>();
+
+        List<Guru> Gurus = guruDAO.selectGuruBykeywords(start,pageSize,"%"+keywords+"%");
+
+
+        int count = guruDAO.keywordsCount("%"+keywords+"%");
+        System.out.println(count);
+        map.put("rows", Gurus);
+        map.put("total", count);
+        return map;
+    }
 }

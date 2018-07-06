@@ -30,4 +30,8 @@ public interface GuruDAO {
      * @return
      */
     public int count();
+
+    public List<Guru> selectGuruBykeywords(@Param("start")Integer start, @Param("pageSize")Integer pageSize,@Param("keywords")String keywords);
+
+    public int keywordsCount(String keywords);
 }

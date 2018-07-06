@@ -118,19 +118,6 @@
                 }
             });
 
-            //添加弹窗
-            $("#add").linkbutton({
-                iconCls:"icon-add",
-                onClick:function(){
-                    $("#dialog").dialog({
-                        width:400,
-                        height:395,
-                        title:"添加",
-                        href:"add.jsp",
-                        modal:true,
-                    });
-                }
-            });
 
         });
 

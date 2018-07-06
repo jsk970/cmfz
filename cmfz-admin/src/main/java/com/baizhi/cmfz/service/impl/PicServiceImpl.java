@@ -61,6 +61,13 @@ public class PicServiceImpl implements PicService {
 
     @Override
     @Transactional
+    public Pic queryPicbyId(Integer id) {
+        Pic pic = picDAO.selectPicById(id);
+        return pic;
+    }
+
+    @Override
+    @Transactional
     public int modifyPic(Pic pic) {
         int i = picDAO.updatePic(pic);
         return i;

@@ -37,4 +37,12 @@ public class PicController {
         Map<String, Object> map = picService.queryPicForPage((page - 1) * rows, rows);
         return map;
     }
+    @RequestMapping("/skiptoModify")
+    @ResponseBody
+    public Pic skiptoModify(Integer id){
+        Pic pic = picService.queryPicbyId(id);
+        return pic;
+
+    }
+
 }

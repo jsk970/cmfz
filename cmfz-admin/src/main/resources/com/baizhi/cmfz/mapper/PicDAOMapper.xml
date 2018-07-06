@@ -26,5 +26,8 @@
         update t_pic set path=#{path},state=#{state},description=#{description},publish_date=#{publishedDate}
         where id=#{id}
     </update>
+    <select id="selectPicById" resultMap="PicResultMap">
+        select * from t_pic where id=#{id}
+    </select>
 
 </mapper>

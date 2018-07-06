@@ -4,7 +4,7 @@
 
 	<script>
         $(function(){
-            $('#datagrid').datagrid({
+            $('#sowing_datagrid').datagrid({
                 title:'轮播图列表',
                 width:500,
                 height:250,
@@ -13,7 +13,7 @@
                 nowrap:false,
                 fitColumns:true,
                 url:'${pageContext.request.contextPath}/showPicForPage.do',
-				toolbar:"#tools",
+				toolbar:"#sowing_tools",
                 pagination:true,
                 pageList:[2,4,6,8,10],
                 pageSize:4,
@@ -27,7 +27,7 @@
                             // 年  月  日
                             var year = date.getFullYear();
                             var month = date.getMonth()+1;
-                            var day = date.getDay();
+                            var day = date.getDate();
                             var hh = date.getHours();
                             var mm = date.getMinutes();
                             var ss = date.getSeconds();
@@ -52,10 +52,10 @@
 
 		//add、edit、delete工具渲染
 
-        $("#edit").linkbutton({
+        $("#sowing_edit").linkbutton({
             iconCls:"icon-edit",
             onClick:function(){
-                var $rowData = $("#datagrid").datagrid("getSelected");
+                var $rowData = $("#sowing_datagrid").datagrid("getSelected");
                 if($rowData==null){
                     $.messager.alert("警告","未选中数据行","warning");
                 }else{
@@ -66,31 +66,31 @@
                         title:"修改信息",
                         width:420,
                         height:305,
-                        href:"login.jsp",
+                        href:"jsp/sowingmap/update.jsp?id="+$rowData.id,
                         modal:true,
                     });
                 }
             }
         });
 
-        $("#addUser").linkbutton({
+        $("#sowing_addUser").linkbutton({
             iconCls:"icon-add",
             onClick:function(){
                 $("#dialog").dialog({
                     title:"添加图片",
                     width:310,
                     height:281,
-                    href:"add.jsp",
+                    href:"jsp/sowingmap/add.jsp",
                     modal:true,
                 });
             }
         });
 
 
-        $("#delete").linkbutton({
+        $("#sowing_delete").linkbutton({
             iconCls:"icon-delete",
             onClick:function(){
-                var $rowData = $("#datagrid").datagrid("getSelected");
+                var $rowData = $("#sowing_datagrid").datagrid("getSelected");
                 if($rowData==null){
                     $.messager.alert("警告","未选中数据行","warning");
                 }else{
@@ -102,10 +102,28 @@
                                 data:"cardno="+$rowData.cardno,
                                 success:function(message){
                                     if(message){
-                                        $.messager.alert("提示","删除成功！","info");
-                                        $("#datagrid").datagrid("load");
+                                        //$.messager.alert("提示","删除成功！","info");
+                                        $.messager.show({
+                                            width:200,
+                                            height:120,
+                                            title:'我的消息',
+                                            msg:"删除成功,<br/>消息将在5秒后关闭。",
+                                            timeout:5000,
+                                            showType:'slide',
+
+                                        });
+                                        $("#sowing_datagrid").datagrid("reload");
                                     }else{
-                                        $.messager.alert("提示","删除失败！","info");
+                                        //$.messager.alert("提示","删除失败！","info");
+                                        $.messager.show({
+                                            width:200,
+                                            height:120,
+                                            title:'我的消息',
+                                            msg:"删除失败,<br/>消息将在5秒后关闭。",
+                                            timeout:5000,
+                                            showType:'slide',
+
+                                        });
                                     }
                                 }
                             });
@@ -121,9 +139,9 @@
 
 	</script>
 
-<table id="datagrid"></table>
-<div id="tools">
-	<a id="edit">编辑/修改</a>
-	<a id="delete">删除</a>
-	<a id="addUser">添加</a>
+<table id="sowing_datagrid"></table>
+<div id="sowing_tools">
+	<a id="sowing_edit">编辑/修改</a>
+	<a id="sowing_delete">删除</a>
+	<a id="sowing_addUser">添加</a>
 </div>

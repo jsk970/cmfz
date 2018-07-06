@@ -21,5 +21,7 @@ public interface PicService {
 
     public int removePicById(Integer id);
 
+    public Pic queryPicbyId(Integer id);
+
     public int modifyPic(Pic pic);
 }

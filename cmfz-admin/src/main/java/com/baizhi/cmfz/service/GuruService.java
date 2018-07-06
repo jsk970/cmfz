@@ -16,4 +16,8 @@ public interface GuruService {
 
     public Map<String,Object> quertGuruForPage(Integer start, Integer pageSize);
 
+    public Map<String,Object> queryGuruBykeywords(Integer start, Integer pageSize,String keywords);
+
+
+
 }

@@ -1,11 +1,17 @@
 package com.baizhi.cmfz.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+
 import java.io.Serializable;
 
 public class Guru implements Serializable {
+    @Excel(name = "编号",orderNum = "1")
     private Integer id;
+    @Excel(name = "姓名")
     private String name;
+    @Excel(name = "简介")
     private String summar;
+    @Excel(name = "图片地址")
     private String picPath;
 
     public Guru() {

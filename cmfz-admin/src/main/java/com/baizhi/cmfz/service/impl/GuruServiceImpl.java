@@ -20,6 +20,7 @@ import java.util.List;
 public class GuruServiceImpl implements GuruService {
     @Autowired
     private GuruDAO guruDAO;
+
     @Override
     @Transactional
     public int batchAddGuru(List<Guru> list) {

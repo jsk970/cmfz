@@ -3,6 +3,7 @@ package com.baizhi.cmfz.service;
 import com.baizhi.cmfz.entity.Guru;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: cmfz
@@ -12,4 +13,7 @@ import java.util.List;
  */
 public interface GuruService {
     public int batchAddGuru(List<Guru> list);
+
+    public Map<String,Object> quertGuruForPage(Integer start, Integer pageSize);
+
 }

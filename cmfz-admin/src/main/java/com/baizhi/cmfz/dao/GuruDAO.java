@@ -1,6 +1,7 @@
 package com.baizhi.cmfz.dao;
 
 import com.baizhi.cmfz.entity.Guru;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,4 +17,17 @@ public interface GuruDAO {
      */
     public int batchInsert(List<Guru> list);
 
+    /**
+     *
+     * @param start
+     * @param pageSize
+     * @return
+     */
+    public List<Guru> selectAllGuruForPage(@Param("start")Integer start, @Param("pageSize")Integer pageSize);
+
+    /**
+     *
+     * @return
+     */
+    public int count();
 }

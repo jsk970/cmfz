@@ -12,6 +12,11 @@
         <result column="publish_date" property="publishedDate"/>
     </resultMap>
     <select id="selectPicForPage" resultMap="PicResultMap">
-        select * from t_pic LIMIT #{start},#{pageSize};
+        select * from t_pic LIMIT #{start},#{pageSize}
     </select>
+
+    <select id="count" resultType="int">
+        select count(*) from t_pic
+    </select>
+
 </mapper>

@@ -25,5 +25,5 @@ public interface PicDAO {
      */
     public List<Pic> selectPicForPage(@Param("start")Integer start,@Param("pageSize")Integer pageSize);
 
-
+    public int count();
 }

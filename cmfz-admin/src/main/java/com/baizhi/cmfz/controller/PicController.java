@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class PicController {
@@ -21,17 +22,10 @@ public class PicController {
     private PicService picService;
     @RequestMapping("/upload")
     @ResponseBody
-    public boolean uploadPic(MultipartFile file,String description ,HttpSession session){
+    public boolean uploadPic(MultipartFile file,Pic pic ,HttpSession session){
 
         try {
-            String fileName = FileUtil.uploadFile(file, "/uploadImges", session);
-
-            Pic pic = new Pic();
-            pic.setPath("uploadImages/"+fileName);
-            pic.setPublishedDate(new Date());
-            pic.setDescription(description);
-            pic.setState("1");
-            picService.addPic(pic);
+            picService.addPic(pic,file,session);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -40,8 +34,8 @@ public class PicController {
     }
     @RequestMapping("/showPicForPage")
     @ResponseBody
-    public List<Pic> showPicForPage(Integer page,Integer rows){
-        List<Pic> pics = picService.queryPicForPage((page - 1) * rows, rows);
-        return pics;
+    public Map<String,Object> showPicForPage(Integer page, Integer rows){
+        Map<String, Object> map = picService.queryPicForPage((page - 1) * rows, rows);
+        return map;
     }
 }

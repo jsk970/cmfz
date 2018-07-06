@@ -34,12 +34,13 @@
                             return year+"年"+month+"月"+day+"日"+" "+hh+":"+mm+":"+ss;
                         }},
                     {field:'state',title:'状态',width:80,align:'right',sortable:true},
+                    {field:'123',title:'123',width:80,align:'right',sortable:true},
 
                 ]],
                 view: detailview,
                 detailFormatter: function(rowIndex, rowData){
                     return '<table><tr>' +
-                        '<td rowspan=2 style="border:0"><img src="${pageContext.request.contextPath}/' + rowData.path +'" style="height:50px;"></td>' +
+                        '<td rowspan=2 style="border:0"><img src="${pageContext.request.contextPath}/upload/' + rowData.path +'" style="height:50px;"></td>' +
                         '<td style="border:0">' +
                         '<p>Attribute: ' + rowData.description + '</p>' +
                         '<p>Status: ' + rowData.state + '</p>' +

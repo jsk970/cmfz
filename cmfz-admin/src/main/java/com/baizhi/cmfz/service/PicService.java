@@ -1,8 +1,11 @@
 package com.baizhi.cmfz.service;
 
 import com.baizhi.cmfz.entity.Pic;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: cmfz
@@ -12,7 +15,7 @@ import java.util.List;
  */
 public interface PicService {
 
-    public int addPic(Pic pic);
+    public int addPic(Pic pic, MultipartFile file,HttpSession session);
 
-    public List<Pic> queryPicForPage(Integer start,Integer pageSize);
+    public Map<String,Object> queryPicForPage(Integer start, Integer pageSize);
 }

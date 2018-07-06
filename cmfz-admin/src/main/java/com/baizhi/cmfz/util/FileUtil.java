@@ -16,21 +16,23 @@ import java.util.UUID;
 public class FileUtil {
 
 
-    public static String uploadFile(MultipartFile file,String directory,HttpSession session){
+    public static boolean uploadFile(MultipartFile file,HttpSession session,String fileName){
         try {
 
-            String realPath = session.getServletContext().getRealPath("/"+directory);
-            String fileName = UUID.randomUUID().toString().replace("-","");
-            String oldName = file.getOriginalFilename();
-            String suffix = oldName.substring(oldName.lastIndexOf("."));
-            //System.out.println(fileName);
-            //System.out.println(realPath);
-            File pic = new File(realPath+"/"+fileName+suffix);
+            String realPath = session.getServletContext().getRealPath("");
+            int indexOf = realPath.lastIndexOf("\\");
+            String prefixPath = realPath.substring(0, indexOf);
+            int indexOf1 = prefixPath.lastIndexOf("\\");
+            String path = prefixPath.substring(0, indexOf1);
+
+            File pic = new File(path+"/upload/"+fileName);
             file.transferTo(pic);
-            return fileName+suffix;
+            return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
+
     }
+
+
 }

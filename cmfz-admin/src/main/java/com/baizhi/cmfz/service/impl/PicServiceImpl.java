@@ -51,4 +51,16 @@ public class PicServiceImpl implements PicService {
         map.put("total", count);
         return map;
     }
+
+    @Override
+    public int removePicById(Integer id) {
+        int i = picDAO.deletePicById(id);
+        return i;
+    }
+
+    @Override
+    public int modifyPic(Pic pic) {
+        int i = picDAO.updatePic(pic);
+        return i;
+    }
 }

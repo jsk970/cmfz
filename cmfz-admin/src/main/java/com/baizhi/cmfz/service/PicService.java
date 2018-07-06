@@ -18,4 +18,8 @@ public interface PicService {
     public int addPic(Pic pic, MultipartFile file,HttpSession session);
 
     public Map<String,Object> queryPicForPage(Integer start, Integer pageSize);
+
+    public int removePicById(Integer id);
+
+    public int modifyPic(Pic pic);
 }

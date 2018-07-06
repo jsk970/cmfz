@@ -19,4 +19,12 @@
         select count(*) from t_pic
     </select>
 
+    <delete id="deletePicById">
+        delete from t_pic where id=#{id}
+    </delete>
+    <update id="updatePic">
+        update t_pic set path=#{path},state=#{state},description=#{description},publish_date=#{publishedDate}
+        where id=#{id}
+    </update>
+
 </mapper>

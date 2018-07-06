@@ -23,7 +23,6 @@ public class PicController {
     @RequestMapping("/upload")
     @ResponseBody
     public boolean uploadPic(MultipartFile file,Pic pic ,HttpSession session){
-
         try {
             picService.addPic(pic,file,session);
             return true;

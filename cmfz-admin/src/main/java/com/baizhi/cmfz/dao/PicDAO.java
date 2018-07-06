@@ -26,4 +26,18 @@ public interface PicDAO {
     public List<Pic> selectPicForPage(@Param("start")Integer start,@Param("pageSize")Integer pageSize);
 
     public int count();
+
+    /**
+     * 删除轮播图片
+     * @param id
+     * @return
+     */
+    public int deletePicById(Integer id);
+
+    /**
+     * 修改轮播图信息
+     * @param pic
+     * @return
+     */
+    public int updatePic(Pic pic);
 }

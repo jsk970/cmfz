@@ -50,8 +50,6 @@
 
             });
 
-
-
 		//add、edit、delete工具渲染
 
         $("#edit").linkbutton({
@@ -68,7 +66,7 @@
                         title:"修改信息",
                         width:420,
                         height:305,
-                        href:"",
+                        href:"login.jsp",
                         modal:true,
                     });
                 }

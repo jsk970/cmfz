@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: cmfz
@@ -26,5 +28,18 @@ public class GuruServiceImpl implements GuruService {
     public int batchAddGuru(List<Guru> list) {
         int i = guruDAO.batchInsert(list);
         return i;
+    }
+
+    @Override
+    @Transactional
+    public Map<String, Object> quertGuruForPage(Integer start, Integer pageSize) {
+
+        HashMap<String, Object> map = new HashMap<>();
+
+        List<Guru> Gurus = guruDAO.selectAllGuruForPage(start,pageSize);
+        int count = guruDAO.count();
+        map.put("rows", Gurus);
+        map.put("total", count);
+        return map;
     }
 }

@@ -8,4 +8,20 @@
             (#{i.id},#{i.name},#{i.summar},#{i.picPath})
         </foreach>
     </insert>
+
+    <resultMap id="GuruResultMap" type="Guru">
+        <id column="id" property="id" />
+        <result column="name" property="name"/>
+        <result column="summary" property="summary"/>
+        <result column="pic_path" property="picPath"/>
+    </resultMap>
+
+
+    <select id="selectAllGuruForPage" resultMap="GuruResultMap">
+        select * from t_guru LIMIT #{start},#{pageSize}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from t_guru
+    </select>
 </mapper>

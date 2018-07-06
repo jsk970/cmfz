@@ -53,12 +53,14 @@ public class PicServiceImpl implements PicService {
     }
 
     @Override
+    @Transactional
     public int removePicById(Integer id) {
         int i = picDAO.deletePicById(id);
         return i;
     }
 
     @Override
+    @Transactional
     public int modifyPic(Pic pic) {
         int i = picDAO.updatePic(pic);
         return i;

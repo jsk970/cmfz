@@ -33,7 +33,11 @@
                             var ss = date.getSeconds();
                             return year+"年"+month+"月"+day+"日"+" "+hh+":"+mm+":"+ss;
                         }},
-                    {field:'state',title:'状态',width:80,align:'right',sortable:true},
+                    {field:'state',title:'状态',width:80,align:'right',sortable:true,formatter : function(value,row,index){
+
+                            if(value=='1'){return '展示'}
+                            else if(value=='0'){return '不展示'}
+                        } },
                     {field:'123',title:'123',width:80,align:'right',sortable:true},
 
                 ]],
@@ -63,9 +67,9 @@
                     //console.log($rowData.borndate);
 
                     $("#dialog").dialog({
-                        title:"修改信息",
-                        width:420,
-                        height:305,
+                        title:"修改轮播图信息",
+                        width:425,
+                        height:405,
                         href:"jsp/sowingmap/update.jsp?id="+$rowData.id,
                         modal:true,
                     });

@@ -2,14 +2,16 @@ package com.baizhi.cmfz.service.impl;
 
 import com.baizhi.cmfz.dao.GuruDAO;
 import com.baizhi.cmfz.entity.Guru;
+import com.baizhi.cmfz.entity.Pic;
 import com.baizhi.cmfz.service.GuruService;
+import com.baizhi.cmfz.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
+import java.util.*;
 
 /**
  * @program: cmfz
@@ -22,6 +24,24 @@ import java.util.Map;
 public class GuruServiceImpl implements GuruService {
     @Autowired
     private GuruDAO guruDAO;
+
+    @Override
+    @Transactional
+    public int addGuru(Guru guru, MultipartFile file, HttpSession session) {
+        try {
+            String fileName = UUID.randomUUID().toString().replace("-","");
+            String oldName = file.getOriginalFilename();
+            fileName += oldName.substring(oldName.lastIndexOf("."));
+            guru.setPicPath(fileName);
+            FileUtil.uploadFile(file, session,fileName);
+            int i = guruDAO.insertGuru(guru);
+
+            return i;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw  new RuntimeException(e);
+        }
+    }
 
     @Override
     @Transactional
@@ -57,5 +77,26 @@ public class GuruServiceImpl implements GuruService {
         map.put("rows", Gurus);
         map.put("total", count);
         return map;
+    }
+
+    @Override
+    @Transactional
+    public int modifyGuruById(Guru guru) {
+        int i = guruDAO.updateGuruById(guru);
+        return i;
+    }
+
+    @Override
+    @Transactional
+    public Guru queryGuruById(Integer id) {
+        Guru guru = guruDAO.selectGuruById(id);
+
+        return guru;
+    }
+
+    @Override
+    public List<Guru> queryAllGuru() {
+        List<Guru> gurus = guruDAO.selectAllGuru();
+        return gurus;
     }
 }

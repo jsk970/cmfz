@@ -23,9 +23,24 @@
         delete from t_pic where id=#{id}
     </delete>
     <update id="updatePic">
-        update t_pic set path=#{path},state=#{state},description=#{description},publish_date=#{publishedDate}
+        update t_pic
+        <set>
+            <if test="path!=null and path!=''">
+                path=#{path},
+            </if>
+            <if test="state!=null and state!=''">
+                state=#{state},
+            </if>
+            <if test="description!=null and description!=''">
+                description=#{description},
+            </if>
+            <if test="publishedDate!=null and publishedDate!=''">
+                publish_date=#{publishedDate}
+            </if>
+        </set>
         where id=#{id}
     </update>
+
     <select id="selectPicById" resultMap="PicResultMap">
         select * from t_pic where id=#{id}
     </select>

@@ -12,7 +12,6 @@
 					<option value="1">展示</option>
 					<option value="0">不展示</option>
 				</select>
-
 			</div>
 			<div style="margin-bottom:15px;margin-left: 20px">
 				<input id="file" name="file">
@@ -58,7 +57,7 @@
 				iconCls:"icon-add",
 				onClick:function(){
 					$("#ff_add").form("submit",{
-						url:"${pageContext.request.contextPath}/upload.do",
+						url:"${pageContext.request.contextPath}/picUpload.do",
 						onSubmit:function(){
 							return $(this).form('validate');
 						},

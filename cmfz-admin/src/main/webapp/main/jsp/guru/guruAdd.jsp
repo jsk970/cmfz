@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" isELIgnored="false" %>
 
 	<div id="panel" class="easyui-panel" style="width:100%;max-width:400px;padding:40px 40px;" >
-		<form id="ff_add" class="easyui-form" method="post" enctype="multipart/form-data">
+		<form id="add_guru_form" class="easyui-form" method="post" enctype="multipart/form-data">
 
 			<div style="margin-bottom:15px;margin-left: 50px">
 				<label for="name">上师法号：</label>
@@ -57,8 +57,8 @@
 			$("#submit_form").linkbutton({
 				iconCls:"icon-add",
 				onClick:function(){
-					$("#ff_add").form("submit",{
-						url:"${pageContext.request.contextPath}/upload.do",
+					$("#add_guru_form").form("submit",{
+						url:"${pageContext.request.contextPath}/GuruAdd.do",
 						onSubmit:function(){
 							return $(this).form('validate');
 						},

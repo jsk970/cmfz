@@ -1,11 +1,23 @@
 package com.baizhi.cmfz.controller;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
+import com.baizhi.cmfz.entity.Guru;
+import com.baizhi.cmfz.entity.Pic;
 import com.baizhi.cmfz.service.GuruService;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,6 +31,40 @@ public class GuruController {
     @Autowired
     private GuruService guruService;
 
+
+    @RequestMapping("/GuruAdd")
+    @ResponseBody
+    public boolean addGuru(MultipartFile file, Guru guru , HttpSession session){
+        try {
+            guruService.addGuru(guru,file,session);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    @RequestMapping("/exportExcel")
+    @ResponseBody
+    public boolean exprotExcel(HttpServletResponse response){
+        try {
+            List<Guru> gurus = guruService.queryAllGuru();
+            ExportParams params = new ExportParams();
+            params.setTitle("上师信息");
+            Workbook workbook = ExcelExportUtil.exportBigExcel(params, Guru.class, gurus);
+            ServletOutputStream out = response.getOutputStream();
+
+            String fileName = new String("上师信息.xlsx".getBytes(), "ISO-8859-1");
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.setHeader("content-disposition","attachment;fileName="+fileName);
+            workbook.write(out);
+            out.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     @RequestMapping("/showAllGuruForPage")
     @ResponseBody
     public Map<String,Object> showAllGuruForPage(Integer page, Integer rows){
@@ -29,9 +75,25 @@ public class GuruController {
     @RequestMapping("/showByKeywords")
     @ResponseBody
     public Map<String,Object> showByKeywords(Integer page, Integer rows,String keywords){
-        System.out.println("123213123123123");
         Map<String, Object> map = guruService.queryGuruBykeywords((page - 1) * rows, rows,keywords);
         return map;
+    }
+    @RequestMapping("/queryGuruById")
+    @ResponseBody
+    public Guru queryGuruById(Integer id){
+        Guru guru = guruService.queryGuruById(id);
+        return guru;
+    }
+    @RequestMapping("/modifyGuru")
+    @ResponseBody
+    public boolean modifyGuru(Guru guru){
+        int i = guruService.modifyGuruById(guru);
+        if(i!=0){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
 }

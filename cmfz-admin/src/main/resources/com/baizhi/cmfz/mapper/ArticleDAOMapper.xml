@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.cmfz.dao.ArticleDAO">
+    <insert id="insertArticle">
+        insert into t_article values(#{id},#{name},#{author},#{publishedDate},#{context},#{state})
+    </insert>
+    <select id="selectAllArticleForPage" resultType="Article">
+        SELECT
+        id,
+        NAME,
+        author,
+        published_date publishedDate,
+        context,
+        state
+        FROM
+        t_article
+        limit #{start},#{pageSize}
+    </select>
+    <select id="count" resultType="int">
+        select count(*) from t_article
+    </select>
+</mapper>

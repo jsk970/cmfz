@@ -34,10 +34,10 @@ public class GuruImportExcel {
         for (Guru guru : list) {
             System.out.println(guru);
         }
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
-        GuruService guruServiceImpl = (GuruService) applicationContext.getBean("guruServiceImpl");
-        int i = guruServiceImpl.batchAddGuru(list);
-        System.out.println(i);
+//        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+//        GuruService guruServiceImpl = (GuruService) applicationContext.getBean("guruServiceImpl");
+//        int i = guruServiceImpl.batchAddGuru(list);
+//        System.out.println(i);
 
 
 

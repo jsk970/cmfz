@@ -27,7 +27,7 @@
                 view: detailview,
                 detailFormatter: function(rowIndex, rowData){
                     return '<table><tr>' +
-                        '<td rowspan=2 style="border:0"><img src="${pageContext.request.contextPath}/upload/' + rowData.path +'" style="height:50px;"></td>' +
+                        '<td rowspan=2 style="border:0"><img src="${pageContext.request.contextPath}/upload/' + rowData.picPath +'" style="height:50px;"></td>' +
                         '<td style="border:0">' +
                         '<p>法号: ' + rowData.name + '</p>' +
                         '<p>简介: ' + rowData.summar + '</p>' +
@@ -50,10 +50,10 @@
 						//console.log($rowData.borndate);
 
 						$("#dialog").dialog({
-							title:"修改信息",
-							width:420,
-							height:305,
-							href:"",
+							title:"修改上师信息",
+							width:435,
+							height:410,
+							href:"jsp/guru/update.jsp?id="+$rowData.id,
 							modal:true,
 						});
 					}
@@ -169,7 +169,7 @@
 	<a id="guru_delete">删除</a>
 	<a id="guru_addUser">添加</a>
 
-	<input id="ss"></input>
+	<input id="ss"/>
 	<div id="mm" style="width:50px">
 		<div data-options="name:'keywords',iconCls:'icon-search'">keywords</div>
 	</div>

@@ -8,19 +8,19 @@ public class Article implements Serializable {
     private String name;
     private String author;
     private Date publishedDate;
-    private String info;
-    private String picPath;
+    private String context;
+    private String state;
 
     public Article() {
     }
 
-    public Article(Integer id, String name, String author, Date publishedDate, String info, String picPath) {
+    public Article(Integer id, String name, String author, Date publishedDate, String context, String state) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.publishedDate = publishedDate;
-        this.info = info;
-        this.picPath = picPath;
+        this.context = context;
+        this.state = state;
     }
 
     public Integer getId() {
@@ -55,20 +55,20 @@ public class Article implements Serializable {
         this.publishedDate = publishedDate;
     }
 
-    public String getInfo() {
-        return info;
+    public String getContext() {
+        return context;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setContext(String context) {
+        this.context = context;
     }
 
-    public String getPicPath() {
-        return picPath;
+    public String getState() {
+        return state;
     }
 
-    public void setPicPath(String picPath) {
-        this.picPath = picPath;
+    public void setState(String state) {
+        this.state = state;
     }
 
     @Override
@@ -78,8 +78,8 @@ public class Article implements Serializable {
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", publishedDate=" + publishedDate +
-                ", info='" + info + '\'' +
-                ", picPath='" + picPath + '\'' +
+                ", context='" + context + '\'' +
+                ", state='" + state + '\'' +
                 '}';
     }
 }

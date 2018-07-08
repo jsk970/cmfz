@@ -5,13 +5,13 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 import java.io.Serializable;
 
 public class Guru implements Serializable {
-    @Excel(name = "编号",orderNum = "1")
+    //@Excel(name = "编号",orderNum = "1")
     private Integer id;
     @Excel(name = "姓名")
     private String name;
     @Excel(name = "简介")
     private String summar;
-    @Excel(name = "图片地址")
+    @Excel(name = "图片地址",width=40.0)
     private String picPath;
 
     public Guru() {

@@ -29,14 +29,19 @@ public class PicServiceImpl implements PicService {
     @Override
     @Transactional
     public int addPic(Pic pic, MultipartFile file, HttpSession session) {
-        String fileName = UUID.randomUUID().toString().replace("-","");
-        String oldName = file.getOriginalFilename();
-        fileName += oldName.substring(oldName.lastIndexOf("."));
-        pic.setPath(fileName);
-        pic.setPublishedDate(new Date());
-        FileUtil.uploadFile(file, session,fileName);
-        int i = picDAO.insertPic(pic);
-        return i;
+        try {
+            String fileName = UUID.randomUUID().toString().replace("-","");
+            String oldName = file.getOriginalFilename();
+            fileName += oldName.substring(oldName.lastIndexOf("."));
+            pic.setPath(fileName);
+            pic.setPublishedDate(new Date());
+            FileUtil.uploadFile(file, session,fileName);
+            int i = picDAO.insertPic(pic);
+            return i;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw  new RuntimeException(e);
+        }
     }
 
     @Override

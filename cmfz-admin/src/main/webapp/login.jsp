@@ -28,13 +28,14 @@
                 $.ajax({
                     type:"POST",
                     url:"<c:url context='${pageContext.request.contextPath}' value='/login.do'/>",
-					dataType:"json",
+					dataType:"text",
 					data:$("#loginForm").serialize(),
                     success:function(result){
-						alert(result)
+						alert(result);
+						//var result = JSON.parse(message);
                        if(result == "success"){
                            window.confirm("登陆成功！");
-						   window.location.href = "${pageContext.request.contextPath}/main/main.jsp";
+						   window.location.href = "main.jsp";
                        }else if(result == "errorCode"){
                            window.confirm("验证码错误");
 					   }else{

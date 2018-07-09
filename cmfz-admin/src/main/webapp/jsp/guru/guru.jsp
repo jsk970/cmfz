@@ -53,7 +53,7 @@
 							title:"修改上师信息",
 							width:435,
 							height:410,
-							href:"jsp/guru/update.jsp?id="+$rowData.id,
+							href:"guru/update.jsp?id="+$rowData.id,
 							modal:true,
 						});
 					}
@@ -67,7 +67,7 @@
 						title:"添加上师信息",
 						width:410,
 						height:300,
-						href:"jsp/guru/guruAdd.jsp",
+						href:"guru/guruAdd.jsp",
 						modal:true,
 					});
 				}
@@ -159,6 +159,19 @@
 
 			});
 
+			$("#guru_BatchAddUser").linkbutton({
+				iconCls:"icon-add",
+				onClick:function(){
+                    $("#dialog").dialog({
+                        title:"批量添加上师信息",
+                        width:410,
+                        height:300,
+                        href:"jsp/guru/guruMoreAdd.jsp",
+                        modal:true,
+                    });
+				}
+			})
+
 		});
 
 	</script>
@@ -168,6 +181,8 @@
 	<a id="guru_edit">编辑/修改</a>
 	<a id="guru_delete">删除</a>
 	<a id="guru_addUser">添加</a>
+	<a id="guru_BatchAddUser">批量添加</a>
+	<a class="easyui-linkbutton" data-options="iconCls:'icon-print'" href="${pageContext.request.contextPath}/exportExcel.do">导出</a>
 
 	<input id="ss"/>
 	<div id="mm" style="width:50px">

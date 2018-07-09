@@ -70,7 +70,7 @@
                         title:"修改轮播图信息",
                         width:425,
                         height:405,
-                        href:"jsp/sowingmap/update.jsp?id="+$rowData.id,
+                        href:"sowingmap/update.jsp?id="+$rowData.id,
                         modal:true,
                     });
                 }
@@ -84,7 +84,7 @@
                     title:"添加图片",
                     width:310,
                     height:281,
-                    href:"jsp/sowingmap/add.jsp",
+                    href:"sowingmap/add.jsp",
                     modal:true,
                 });
             }

@@ -31,4 +31,12 @@ public class Context implements Serializable {
     public void setData(List<String> data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "Context{" +
+                "errno=" + errno +
+                ", data=" + data +
+                '}';
+    }
 }

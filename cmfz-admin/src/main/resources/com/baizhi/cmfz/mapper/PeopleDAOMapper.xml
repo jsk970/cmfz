@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.cmfz.dao.PeopleDAO">
+    <select id="selectAll" resultType="People">
+        select local name,count(*) AS value from t_user GROUP BY local
+    </select>
+    <select id="selectMan" resultType="People">
+        SELECT LOCAL NAME,count(*) AS VALUE FROM (SELECT * FROM t_user WHERE sex = '1') a GROUP BY LOCAL
+    </select>
+    <select id="selectWomale" resultType="People">
+        SELECT LOCAL NAME,count(*) AS VALUE FROM (SELECT * FROM t_user WHERE sex = '0') a GROUP BY LOCAL
+    </select>
+</mapper>

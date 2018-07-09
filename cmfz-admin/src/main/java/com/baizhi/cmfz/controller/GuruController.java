@@ -1,7 +1,9 @@
 package com.baizhi.cmfz.controller;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.baizhi.cmfz.entity.Guru;
 import com.baizhi.cmfz.entity.Pic;
 import com.baizhi.cmfz.service.GuruService;
@@ -15,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
@@ -32,6 +35,14 @@ public class GuruController {
     private GuruService guruService;
 
 
+    @RequestMapping("/queryAllGuru")
+    @ResponseBody
+    public List<Guru> queryAllGuru(){
+        List<Guru> gurus = guruService.queryAllGuru();
+        return gurus;
+    }
+
+
     @RequestMapping("/GuruAdd")
     @ResponseBody
     public boolean addGuru(MultipartFile file, Guru guru , HttpSession session){
@@ -43,6 +54,32 @@ public class GuruController {
         }
         return false;
     }
+
+    @RequestMapping("/GuruMoreAdd")
+    @ResponseBody
+    public boolean guruMoreAdd(MultipartFile file){
+        ImportParams params = new ImportParams();
+        //设置表格标题行数(默认0)
+        params.setTitleRows(0);
+        //设置表头行数（默认1）
+        params.setHeadRows(1);
+        try {
+            List<Guru> list = ExcelImportUtil.importExcel(file.getInputStream(),Guru.class, params);
+            for (Guru guru : list) {
+                System.out.println(guru);
+            }
+            guruService.batchAddGuru(list);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+
+        }
+    }
+
+
+
+
     @RequestMapping("/exportExcel")
     @ResponseBody
     public boolean exprotExcel(HttpServletResponse response){

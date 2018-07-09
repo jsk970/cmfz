@@ -10,12 +10,12 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/easyui-lang-zh_CN.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/wangEditor.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/datagrid-detailview.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/china.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/wangEditor.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/datagrid-detailview.js"></script>
 	<script type="text/javascript">
         $(function(){
-
-
             $.ajax({
 				type:"POST",
 				url:"${pageContext.request.contextPath}/showAllMenu.do",
@@ -145,7 +145,7 @@
     </div>   
     <div data-options="region:'center'">
     	<div id="center_tab" class="easyui-tabs" data-options="fit:true,narrow:true,pill:true">
-		    <div title="主页" data-options="iconCls:'icon-neighbourhood',"  style="background-image:url(image/shouye.jpg);background-repeat: no-repeat;background-size:100% 100%;"></div>
+		    <div title="主页" data-options="iconCls:'icon-neighbourhood',"  style="background-image:url(jsp/image/shouye.jpg);background-repeat: no-repeat;background-size:100% 100%;"></div>
 		</div>  
     </div>   
 </body>

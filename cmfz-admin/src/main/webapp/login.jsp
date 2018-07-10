@@ -31,10 +31,10 @@
 					dataType:"text",
 					data:$("#loginForm").serialize(),
                     success:function(result){
-						alert(result);
+						//alert(result);
 						//var result = JSON.parse(message);
                        if(result == "success"){
-                           window.confirm("登陆成功！");
+                           //window.confirm("登陆成功！");
 						   window.location.href = "main.jsp";
                        }else if(result == "errorCode"){
                            window.confirm("验证码错误");

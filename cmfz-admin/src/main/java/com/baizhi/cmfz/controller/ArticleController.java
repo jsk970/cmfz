@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @program: cmfz
@@ -33,14 +30,24 @@ public class ArticleController {
     @ResponseBody
     public boolean addArticle(Article article){
         //System.out.println(article);
-        article.setPublishedDate(new Date());
-        int i = articleService.addArticle(article);
-        if(i!=0){
+        try {
+            article.setPublishedDate(new Date());
+            articleService.addArticle(article);
             return true;
-        }else{
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
+
+    @RequestMapping("/queryArticleForPage")
+    @ResponseBody
+    public Map<String,Object> queryAllArticleForPage(Integer page, Integer rows){
+        Map<String, Object> map = articleService.queryArticleForPage((page - 1) * rows, rows);
+        return map;
+    }
+
+
 
     @RequestMapping("/contextUpload")
     @ResponseBody

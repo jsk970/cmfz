@@ -4,24 +4,25 @@
 
 	<script>
         $(function(){
-            $('#sowing_datagrid').datagrid({
-                title:'轮播图列表',
+            $('#article_datagrid').datagrid({
+                title:'日志列表',
                 width:500,
                 height:250,
                 remoteSort:false,
                 singleSelect:true,
                 nowrap:false,
                 fitColumns:true,
-                url:'${pageContext.request.contextPath}/showPicForPage.do',
-				toolbar:"#sowing_tools",
+                url:'${pageContext.request.contextPath}/queryArticleForPage.do',
+				//toolbar:"#article_tools",
                 pagination:true,
                 pageList:[2,4,6,8,10],
                 pageSize:4,
 				fit:true,
                 columns:[[
-                    {field:'id',title:'图片编号',width:80},
-                    {field:'description',title:'描述',width:100,sortable:true},
-                    {field:'publishedDate',title:'上传时间',width:80,align:'right',sortable:true,fitColumns:true,formatter:function(value,row,index){ // 格式化展示数据到对应的列
+                    {field:'id',title:'文章编号',width:80},
+                    {field:'name',title:'文章标题',width:100,sortable:true},
+                    {field:'author',title:'作者',width:100,sortable:true},
+                    {field:'publishedDate',title:'创建时间',width:80,align:'right',sortable:true,fitColumns:true,formatter:function(value,row,index){ // 格式化展示数据到对应的列
                             var date = new Date(value);
                             //console.log("value:"+date);
                             // 年  月  日
@@ -33,21 +34,13 @@
                             var ss = date.getSeconds();
                             return year+"年"+month+"月"+day+"日"+" "+hh+":"+mm+":"+ss;
                         }},
-                    {field:'state',title:'状态',width:80,align:'right',sortable:true,formatter : function(value,row,index){
-
-                            if(value=='1'){return '展示'}
-                            else if(value=='0'){return '不展示'}
-                        } },
-
 
                 ]],
                 view: detailview,
                 detailFormatter: function(rowIndex, rowData){
                     return '<table><tr>' +
-                        '<td rowspan=2 style="border:0"><img src="${pageContext.request.contextPath}/upload/' + rowData.path +'" style="height:50px;"></td>' +
-                        '<td style="border:0">' +
-                        '<p>Attribute: ' + rowData.description + '</p>' +
-                        '<p>Status: ' + rowData.state + '</p>' +
+						'<td style="border:0">' +
+                        '<p>内容: ' + rowData.context + '</p>' +
                         '</td>' +
                         '</tr></table>';
                 }
@@ -56,10 +49,10 @@
 
 		//add、edit、delete工具渲染
 
-        $("#sowing_edit").linkbutton({
+        $("#article_edit").linkbutton({
             iconCls:"icon-edit",
             onClick:function(){
-                var $rowData = $("#sowing_datagrid").datagrid("getSelected");
+                var $rowData = $("#log_datagrid").datagrid("getSelected");
                 if($rowData==null){
                     $.messager.alert("警告","未选中数据行","warning");
                 }else{
@@ -77,7 +70,7 @@
             }
         });
 
-        $("#sowing_addUser").linkbutton({
+        $("#article_addUser").linkbutton({
             iconCls:"icon-add",
             onClick:function(){
                 $("#dialog").dialog({
@@ -91,10 +84,10 @@
         });
 
 
-        $("#sowing_delete").linkbutton({
+        $("#article_delete").linkbutton({
             iconCls:"icon-delete",
             onClick:function(){
-                var $rowData = $("#sowing_datagrid").datagrid("getSelected");
+                var $rowData = $("#article_datagrid").datagrid("getSelected");
                 if($rowData==null){
                     $.messager.alert("警告","未选中数据行","warning");
                 }else{
@@ -116,7 +109,7 @@
                                             showType:'slide',
 
                                         });
-                                        $("#sowing_datagrid").datagrid("reload");
+                                        $("#article_datagrid").datagrid("reload");
                                     }else{
                                         //$.messager.alert("提示","删除失败！","info");
                                         $.messager.show({
@@ -143,9 +136,9 @@
 
 	</script>
 
-<table id="sowing_datagrid"></table>
-<div id="sowing_tools">
-	<a id="sowing_edit">编辑/修改</a>
-	<a id="sowing_delete">删除</a>
-	<a id="sowing_addUser">添加</a>
+<table id="article_datagrid"></table>
+<div id="article_tools">
+	<a id="article_edit">编辑/修改</a>
+	<a id="article_delete">删除</a>
+	<a id="article_addUser">添加</a>
 </div>

@@ -1,8 +1,10 @@
 package com.baizhi.cmfz.service;
 
 import com.baizhi.cmfz.entity.Article;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: cmfz
@@ -12,8 +14,10 @@ import java.util.List;
  */
 public interface ArticleService {
 
-    public int addArticle(Article article);
+    public void addArticle(Article article);
 
 
-    public List<Article> queryArticle();
+    public Map<String,Object> queryArticleForPage(@Param("start")Integer start, @Param("pageSize")Integer pageSize);
+
+
 }

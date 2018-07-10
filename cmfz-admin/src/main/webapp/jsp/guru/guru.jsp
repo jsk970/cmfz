@@ -53,7 +53,7 @@
 							title:"修改上师信息",
 							width:435,
 							height:410,
-							href:"guru/update.jsp?id="+$rowData.id,
+							href:"jsp/guru/update.jsp?id="+$rowData.id,
 							modal:true,
 						});
 					}
@@ -67,7 +67,7 @@
 						title:"添加上师信息",
 						width:410,
 						height:300,
-						href:"guru/guruAdd.jsp",
+						href:"jsp/guru/guruAdd.jsp",
 						modal:true,
 					});
 				}

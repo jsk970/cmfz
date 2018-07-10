@@ -24,8 +24,6 @@ public class PicServiceImpl implements PicService {
     @Autowired
     private PicDAO picDAO;
 
-
-
     @Override
     @Transactional
     public int addPic(Pic pic, MultipartFile file, HttpSession session) {
@@ -34,6 +32,7 @@ public class PicServiceImpl implements PicService {
             String oldName = file.getOriginalFilename();
             fileName += oldName.substring(oldName.lastIndexOf("."));
             pic.setPath(fileName);
+
             pic.setPublishedDate(new Date());
             FileUtil.uploadFile(file, session,fileName);
             int i = picDAO.insertPic(pic);
@@ -59,9 +58,13 @@ public class PicServiceImpl implements PicService {
 
     @Override
     @Transactional
-    public int removePicById(Integer id) {
-        int i = picDAO.deletePicById(id);
-        return i;
+    public void removePicById(Integer id) {
+        try {
+            picDAO.deletePicById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -73,8 +76,12 @@ public class PicServiceImpl implements PicService {
 
     @Override
     @Transactional
-    public int modifyPic(Pic pic) {
-        int i = picDAO.updatePic(pic);
-        return i;
+    public void modifyPic(Pic pic) {
+        try {
+            picDAO.updatePic(pic);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 }

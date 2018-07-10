@@ -16,7 +16,7 @@ import java.util.Map;
 public interface GuruService {
     public int addGuru(Guru guru, MultipartFile file, HttpSession session);
 
-    public int batchAddGuru(List<Guru> list);
+    public int addBatchGuru(List<Guru> list);
 
     public Map<String,Object> quertGuruForPage(Integer start, Integer pageSize);
 

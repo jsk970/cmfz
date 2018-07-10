@@ -10,20 +10,20 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @program: cmfz
  * @description: ${description}
  * @author: Elk love madness
- * @create: 2018-07-08 10:13
+ * @create: 2018-07-09 20:20
  */
-public class PicServiceTest {
-
+public class AspectjTest {
     @Test
-    public void UpdatePic(){
+    public void test1(){
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
-        PicService picServiceImpl = (PicService) applicationContext.getBean("picServiceImpl");
+        PicService picService = (PicService) applicationContext.getBean("picServiceImpl");
         Pic pic = new Pic();
         pic.setId(7);
-        pic.setState("1");
-        pic.setDescription("11111111");
-        picServiceImpl.modifyPic(pic);
+        pic.setState("00");
+        picService.modifyPic(pic);
         //System.out.println(i);
-
     }
+
+
+
 }

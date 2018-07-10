@@ -49,12 +49,14 @@ public class PicController {
     @ResponseBody
     public boolean modifyPic(Pic pic){
         System.out.println(pic);
-        int i = picService.modifyPic(pic);
-        if (i != 0) {
+        try {
+            picService.modifyPic(pic);
             return true;
-        }else{
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
+
     }
 
 }

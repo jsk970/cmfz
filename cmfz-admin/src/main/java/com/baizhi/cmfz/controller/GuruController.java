@@ -68,7 +68,7 @@ public class GuruController {
             for (Guru guru : list) {
                 System.out.println(guru);
             }
-            guruService.batchAddGuru(list);
+            guruService.addBatchGuru(list);
             return true;
         } catch (Exception e) {
             e.printStackTrace();

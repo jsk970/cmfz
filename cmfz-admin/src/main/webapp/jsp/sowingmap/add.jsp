@@ -78,7 +78,7 @@
 
                                 });
 
-                                $("#datagrid").datagrid("load");
+                                $("#datagrid").datagrid("reload");
 							}else{
                                 $.messager.show({
 									width:200,

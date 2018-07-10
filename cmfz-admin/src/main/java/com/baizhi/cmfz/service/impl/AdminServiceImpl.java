@@ -26,7 +26,7 @@ public class AdminServiceImpl implements AdminService {
         String MD5Password = DigestUtils.md5Hex(admin.getPassword()+salt);
         admin.setPassword(MD5Password);
 
-        System.out.println("addService:"+admin);
+        //System.out.println("addService:"+admin);
         int i = adminDAO.insertAdmin(admin);
         return i;
     }
@@ -35,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     public Admin queryAdminByNameAndPassword(String name,String password) {
         Admin admin = adminDAO.selectByName(name);
-        System.out.println("loginService:"+admin);
+        //System.out.println("loginService:"+admin);
         if (admin!=null){
             String salt = admin.getSalt();
             String MD5Password = DigestUtils.md5Hex(password+salt);

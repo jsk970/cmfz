@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.cmfz.dao.LogDAO">
+
+    <insert id="insertLog">
+        insert into t_log values(#{id},#{user},#{time},#{resource},#{action},#{message},#{result})
+    </insert>
+    
+    <select id="selectAllLogForPage" resultType="Log">
+        select * from t_log limit #{start},#{pageSize}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from t_log
+    </select>
+</mapper>

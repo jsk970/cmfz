@@ -45,7 +45,7 @@ public class GuruServiceImpl implements GuruService {
 
     @Override
     @Transactional
-    public int batchAddGuru(List<Guru> list) {
+    public int addBatchGuru(List<Guru> list) {
         int i = guruDAO.batchInsert(list);
         return i;
     }

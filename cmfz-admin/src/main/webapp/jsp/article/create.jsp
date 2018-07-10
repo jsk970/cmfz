@@ -32,7 +32,6 @@
                 $("#article_form").form("submit",{
                     url:"${pageContext.request.contextPath}/addArticle.do",
                     queryParams:{"context":editor.txt.html()},
-                    //dateType:"json",
                     onSubmit:function(){
                         return $(this).form('enableValidation').form('validate');
                     },

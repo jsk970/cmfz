@@ -19,9 +19,9 @@ public interface PicService {
 
     public Map<String,Object> queryPicForPage(Integer start, Integer pageSize);
 
-    public int removePicById(Integer id);
+    public void removePicById(Integer id);
 
     public Pic queryPicbyId(Integer id);
 
-    public int modifyPic(Pic pic);
+    public void modifyPic(Pic pic);
 }

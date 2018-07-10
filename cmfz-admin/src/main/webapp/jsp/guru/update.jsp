@@ -46,13 +46,14 @@
 				onClick:function(){
 					$("#guru_ff").form("submit",{
 						url:"${pageContext.request.contextPath}/modifyGuru.do",
-						dateType:"json",
+
 						onSubmit:function(){
 							return $(this).form('enableValidation').form('validate');
 						},
 						success:function(message){
-							console.log(message);
-							if(message){
+						    var result = JSON.parse(message);
+							console.log(result);
+							if(result){
 							    $("#dialog").dialog("close");
                                 $.messager.show({
                                     width:200,

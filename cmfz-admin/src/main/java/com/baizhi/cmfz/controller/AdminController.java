@@ -39,8 +39,8 @@ public class AdminController {
     @ResponseBody
     public String login(String name, String password,String enCode,boolean RememberUsername, HttpSession session,HttpServletResponse response){
 
-        System.out.println(name);
-        System.out.println(password);
+       // System.out.println(name);
+        //System.out.println(password);
 
 
         String result = "success";

@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public interface LogService {
 
-    public void addLog(Log log);
+    public void appendLog(Log log);
 
     public Map<String,Object> queryAllLog(Integer start ,Integer pageSize);
 }

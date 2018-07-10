@@ -27,10 +27,9 @@ import java.util.Date;
 
 @Aspect
 public class MyAdvice {
-
-
     @Autowired
     private LogService logService;
+
     //execution(* com.baizhi.cmfz.service.impl.*.modify*(..)) || execution(* com.baizhi.cmfz.service.impl.*.add*(..)) || execution(* com.baizhi.cmfz.service.impl.*.remove*(..))
     @Pointcut("execution(* com.baizhi.cmfz.service.impl.*.modify*(..)) || execution(* com.baizhi.cmfz.service.impl.*.add*(..)) || execution(* com.baizhi.cmfz.service.impl.*.remove*(..))")
     public void pc(){}
@@ -38,7 +37,7 @@ public class MyAdvice {
 
 
     @Around("pc()")
-    public Object addLog(ProceedingJoinPoint pjp) throws Throwable {
+    public Object appendLog(ProceedingJoinPoint pjp) throws Throwable {
         System.out.println("------------------------------------");
         Object object = null;
         String result = "success";
@@ -50,11 +49,11 @@ public class MyAdvice {
         }
         Log log = new Log();
 
-       // HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-       // HttpSession session = request.getSession();
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
 
-        //Admin admin = (Admin) session.getAttribute("Admin");
-        //log.setUser(admin.getName());
+        Admin admin = (Admin) session.getAttribute("Admin");
+        log.setUser(admin.getName());
         log.setResult(result);
 
         log.setTime(new Date());
@@ -85,7 +84,7 @@ public class MyAdvice {
 
         System.out.println("log:"+log);
 
-        logService.addLog(log);
+        logService.appendLog(log);
 
         return object;
     }

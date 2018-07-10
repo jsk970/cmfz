@@ -24,7 +24,7 @@ public class LogServiceImpl implements LogService {
 
     @Override
     @Transactional
-    public void addLog(Log log) {
+    public void appendLog(Log log) {
         try {
             logDAO.insertLog(log);
         } catch (Exception e) {

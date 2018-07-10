@@ -54,8 +54,7 @@
 	<bean id="myAdvice" class="com.baizhi.cmfz.aspectj.MyAdvice"></bean>
 
 
-
-
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
 </beans>
 

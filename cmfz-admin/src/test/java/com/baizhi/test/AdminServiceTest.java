@@ -16,11 +16,11 @@ public class AdminServiceTest {
         Admin admin = new Admin();
         String password="110";
         admin.setState("0");
-        admin.setName("李四");
+        admin.setName("jsk");
         admin.setPassword(password);
 
         System.out.println(admin);
-        adminServiceImpl.addAdmin(admin);
+        adminServiceImpl.appendAdmin(admin);
 
 
     }

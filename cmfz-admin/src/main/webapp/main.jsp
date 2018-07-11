@@ -29,8 +29,6 @@
 									"<a style=\"width:100%\" class=\"easyui-linkbutton\" data-options=\"iconCls:'"+secondMenu.menuIcon+
 									"',plain:true\" data-link=\""+ secondMenu.menuUrl+"\">"+
 									secondMenu.menuName+"</a></p>";
-
-
 							});
                         	$.parser.parse($("btn").parent());
                         	$('#left_accordion').accordion('add', {
@@ -118,8 +116,6 @@
                     });
                 }
             });
-
-
         });
 
 	</script>
@@ -130,7 +126,7 @@
 <div id="dialog"></div>
     <div data-options="region:'north',split:true" style="height:60px;background-color:  #5C160C">
     	<div style="font-size: 24px;color: #FAF7F7;font-family: 楷体;font-weight: 900;width: 500px;float:left;padding-left: 20px;padding-top: 10px" >持明法洲后台管理系统</div>
-    	<div style="font-size: 16px;color: #FAF7F7;font-family: 楷体;width: 300px;float:right;padding-top:15px">欢迎您:xxxxx &nbsp;<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改密码</a>&nbsp;&nbsp;
+    	<div style="font-size: 16px;color: #FAF7F7;font-family: 楷体;width: 300px;float:right;padding-top:15px">欢迎您:${Admin} &nbsp;<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改密码</a>&nbsp;&nbsp;
 			<a id="LoginOut" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-01'">退出系统</a></div>
     </div>   
     <div data-options="region:'south',split:true" style="height: 40px;background: #5C160C">
@@ -138,10 +134,7 @@
     </div>   
        
     <div data-options="region:'west',title:'导航菜单',split:true" style="width:220px;">
-    	<div id="left_accordion" class="easyui-accordion" data-options="fit:true">
-
-
-		</div>  
+    	<div id="left_accordion" class="easyui-accordion" data-options="fit:true"></div>
     </div>   
     <div data-options="region:'center'">
     	<div id="center_tab" class="easyui-tabs" data-options="fit:true,narrow:true,pill:true">

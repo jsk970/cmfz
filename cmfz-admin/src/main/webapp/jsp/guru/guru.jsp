@@ -182,7 +182,7 @@
 	<a id="guru_delete">删除</a>
 	<a id="guru_addUser">添加</a>
 	<a id="guru_BatchAddUser">批量添加</a>
-	<a class="easyui-linkbutton" data-options="iconCls:'icon-print'" href="${pageContext.request.contextPath}/exportExcel.do">导出</a>
+	<a class="easyui-linkbutton" href="${pageContext.request.contextPath}/exportExcel.do">导出</a>
 
 	<input id="ss"/>
 	<div id="mm" style="width:50px">

@@ -16,6 +16,8 @@
 	<script type="text/javascript">
 	
 		$(function(){
+
+
 		    $.ajax({
                 type:"POST",
                 url:"${pageContext.request.contextPath}/admin/getCookie.do",
@@ -24,22 +26,20 @@
                 }
 			});
             //  form 表单提交
-            $("#loginForm").bind("submit",function(){
+            $("#registForm").bind("submit",function(){
                 $.ajax({
                     type:"POST",
-                    url:"<c:url context='${pageContext.request.contextPath}' value='/admin/login.do'/>",
-					dataType:"text",
-					data:$("#loginForm").serialize(),
-                    success:function(result){
+                    url:"<c:url context='${pageContext.request.contextPath}' value='/admin/regist.do'/>",
+					//dataType:"text",
+					data:$("#registForm").serialize(),
+                    success:function(message){
 						//alert(result);
-						//var result = JSON.parse(message);
-                       if(result == "success"){
+						var result = JSON.parse(message);
+                       if(result){
                            //window.confirm("登陆成功！");
-						   window.location.href = "main.jsp";
-                       }else if(result == "errorCode"){
-                           window.confirm("验证码错误");
-					   }else{
-                           window.confirm("用户名或密码错误！");
+						   window.location.href = "login.jsp";
+                       }else{
+                           window.confirm("注册失败！");
                        }
                     },
                 });
@@ -53,7 +53,7 @@
 <body>
 <div class="login">
 
-	<form id="loginForm" method="post">
+	<form id="registForm" method="post">
 
 		<table>
 			<tbody>
@@ -65,7 +65,7 @@
 					用户名:
 				</th>
 				<td>
-					<input type="text"  name="name" class="text"  maxlength="20" required/>
+					<input type="text" name="name" class="text" maxlength="20" required/>
 				</td>
 			</tr>
 			<tr>
@@ -73,42 +73,22 @@
 					密&nbsp;&nbsp;&nbsp;码:
 				</th>
 				<td>
-					<input type="password" name="password" class="text" value="" maxlength="20" autocomplete="off" required/>
+					<input type="password" name="password" class="text" maxlength="20" autocomplete="off" required/>
 				</td>
 			</tr>
 
-			<tr>
-				<td>&nbsp;</td>
-				<th>验证码:</th>
-				<td>
-					<input type="text" id="enCode" name="enCode" class="text captcha" maxlength="4" autocomplete="off" required/>
-					<img src="<c:url context='${pageContext.request.contextPath}' value='/code.do'/>"
-						 style="cursor:pointer; width: 80px;height: 20px ;line-height:30px;"
-						 title="看不清可单击图片刷新"
-						 onclick="this.src='<c:url value="/code.do" />?q='+Math.random();" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					&nbsp;
-				</td>
-				<th>
-					&nbsp;
-				</th>
-				<td>
-					<label>
-						<input type="checkbox" id="isRememberUsername" name="RememberUsername" value="true"/> 记住用户名
-					</label>
-				</td>
-			</tr>
+
+
+
 			<tr>
 				<td>&nbsp;</td>
 				<th>&nbsp;</th>
 				<td>
-					<input type="button" class="homeButton" value="" ><input type="submit" class="loginButton" value="登录">
+					<input type="button" class="homeButton" value="" ><input type="submit" class="loginButton" value="注册">
 				</td>
 			</tr>
-			</tbody></table>
+			</tbody>
+		</table>
 		<div class="powered">COPYRIGHT © 2008-2017.</div>
 		<div class="link">
 			<a href="http://www.chimingfowang.com/">持名佛网首页</a> |

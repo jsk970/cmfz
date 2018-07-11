@@ -56,5 +56,7 @@
 
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
+	<import resource="applicationContext-shiro.xml"></import>
+
 </beans>
 

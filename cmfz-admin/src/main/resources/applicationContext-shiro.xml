@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.2.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-3.2.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+
+	<!--shiro的过滤器工厂对象  负责权限的校验 处理请求的bean-->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager"></property>
+		<property name="loginUrl" value="/login.jsp"></property>
+		<property name="unauthorizedUrl" value="/error.jsp"></property>
+		<property name="filterChainDefinitions">
+			<value>
+				<!--
+                 /main.jsp=anon
+                 url=过滤器简称
+                 过滤器：anon | authc | user | logout | roles | perms
+            	-->
+				/js/**=anon
+				/css/**=anon
+				/img/**=anon
+				/script/**=anon
+				/themes/**=anon
+				/code.do=anon
+				/admin/**=anon
+				/login.jsp=anon
+				/regist.jsp=anon
+				/main.jsp=user
+				/**=user
+			</value>
+		</property>
+	</bean>
+	<!--初始化web环境下的安全管理器-->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realms">
+			<list>
+				<ref bean="myRealm"></ref>
+			</list>
+		</property>
+		<!-- 免登陆管理器 实现免登陆功能 -->
+		<property name="rememberMeManager" ref="rememberMeManager"></property>
+	</bean>
+
+	<!--声明免登陆管理器-->
+	<bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+		<property name="cookie" ref="simpleCookie"></property>
+	</bean>
+
+	<!--对免登陆的cookie配置-->
+	<bean id="simpleCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<!--cookie名称-->
+		<property name="name" value="user"></property>
+		<property name="maxAge" value="604800"></property>
+		<property name="path" value="/"></property>
+	</bean>
+
+
+
+
+	<bean id="myRealm" class="com.baizhi.cmfz.util.MyRealm">
+		<property name="credentialsMatcher" ref="credentialsMatcher"></property>
+	</bean>
+	<!--声明复杂的凭证匹配器对象-->
+	<bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+		<property name="hashAlgorithmName" value="md5"></property>
+		<property name="hashIterations" value="512"></property>
+	</bean>
+
+
+</beans>
+

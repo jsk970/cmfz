@@ -215,13 +215,6 @@
             <version>1.11</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/net.pusuo/patchca -->
-        <dependency>
-            <groupId>net.pusuo</groupId>
-            <artifactId>patchca</artifactId>
-            <version>0.5.0</version>
-        </dependency>
-
 
         <!--easypoi-->
         <dependency>
@@ -274,7 +267,6 @@
             <artifactId>shiro-ehcache</artifactId>
             <version>1.2.6</version>
         </dependency>
-
 
 
 

@@ -43,7 +43,7 @@ public class AdminController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public String login(String name, String password,String enCode,boolean RememberUsername, HttpSession session,HttpServletResponse response){
+    public String login(String name, String password,String enCode,boolean RememberUsername, HttpSession session){
 
         String result = "success";
         Admin admin = null;
@@ -66,7 +66,7 @@ public class AdminController {
             Subject subject = SecurityUtils.getSubject();
             try {
                 subject.login(new UsernamePasswordToken(name,password,RememberUsername));
-                session.setAttribute("Admin",name);
+
                 return result;
             } catch (AuthenticationException e) {
                 e.printStackTrace();

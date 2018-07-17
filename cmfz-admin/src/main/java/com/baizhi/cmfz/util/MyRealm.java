@@ -2,14 +2,18 @@ package com.baizhi.cmfz.util;
 
 import com.baizhi.cmfz.dao.AdminDAO;
 import com.baizhi.cmfz.entity.Admin;
+import com.baizhi.cmfz.entity.Permission;
+import com.baizhi.cmfz.entity.Role;
 import com.baizhi.cmfz.service.AdminService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -31,7 +35,19 @@ public class MyRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+
+        String name = (String) principalCollection.getPrimaryPrincipal();
+        List<Role> roles = adminService.queryRoleByName(name);
+        // 封装查询到的授权信息对象
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        for (Role role : roles) {
+            info.addRole(role.getRoleTag());
+        }
+        List<Permission> permissions = adminService.queryPermissionByName(name);
+        for (Permission permission : permissions) {
+            info.addStringPermission(permission.getPermissionTag());
+        }
+        return info;
     }
 
     /**
@@ -47,7 +63,6 @@ public class MyRealm extends AuthorizingRealm {
         String username = usernamePasswordToken.getUsername();
         Admin admin = adminService.queryAdminByName(username);
         System.out.println("admin:"+admin);
-
         return new SimpleAuthenticationInfo(admin.getName(),admin.getPassword(), ByteSource.Util.bytes(admin.getSalt()),UUID.randomUUID().toString());
 
     }

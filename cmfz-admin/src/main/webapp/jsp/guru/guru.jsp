@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 		 pageEncoding="utf-8" isELIgnored="false" %>
-
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 
 	<script>
         $(function(){
@@ -182,8 +182,9 @@
 	<a id="guru_delete">删除</a>
 	<a id="guru_addUser">添加</a>
 	<a id="guru_BatchAddUser">批量添加</a>
+	<shiro:hasRole name="root">
 	<a class="easyui-linkbutton" href="${pageContext.request.contextPath}/exportExcel.do">导出</a>
-
+	</shiro:hasRole>
 	<input id="ss"/>
 	<div id="mm" style="width:50px">
 		<div data-options="name:'keywords',iconCls:'icon-search'">keywords</div>

@@ -43,14 +43,14 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="utf-8"/>
 	</bean>
-	<!-- 权限验证过滤器配置 -->
-	<!-- <mvc:interceptors>
-		<mvc:interceptor>
-			过滤所有的请求
-			<mvc:mapping path="/**"/>
-			<bean class="com.baizhi.cmfz.handlerinterceptor.CheckLogined"/>
-		</mvc:interceptor>
-	</mvc:interceptors> -->
+
+
+	<aop:config proxy-target-class="true"></aop:config>
+
+	<!--springmvc 工厂是否可以使用spring工厂创建的bean-->
+	<bean id="authorizationAttributeSourceAdvisor" class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager"></property>
+	</bean>
 	
 </beans>
 

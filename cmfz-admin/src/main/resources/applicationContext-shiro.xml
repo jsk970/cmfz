@@ -10,8 +10,6 @@
                            http://www.springframework.org/schema/tx
                            http://www.springframework.org/schema/tx/spring-tx-3.2.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-
-
 	<!--shiro的过滤器工厂对象  负责权限的校验 处理请求的bean-->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager"></property>
@@ -47,6 +45,10 @@
 		</property>
 		<!-- 免登陆管理器 实现免登陆功能 -->
 		<property name="rememberMeManager" ref="rememberMeManager"></property>
+		<!--<property name="sessionManager" ref="sessionManager"></property>-->
+	</bean>
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:ehcache.xml"></property>
 	</bean>
 
 	<!--声明免登陆管理器-->
@@ -62,18 +64,20 @@
 		<property name="path" value="/"></property>
 	</bean>
 
-
-
-
 	<bean id="myRealm" class="com.baizhi.cmfz.util.MyRealm">
 		<property name="credentialsMatcher" ref="credentialsMatcher"></property>
 	</bean>
+
 	<!--声明复杂的凭证匹配器对象-->
 	<bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
 		<property name="hashAlgorithmName" value="md5"></property>
 		<property name="hashIterations" value="512"></property>
 	</bean>
 
+	<!--<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">-->
+		<!--<property name="globalSessionTimeout" value="604800000"></property>-->
+		<!--<property name="deleteInvalidSessions" value="true"></property>-->
+	<!--</bean>-->
 
 </beans>
 
